@@ -1,4 +1,5 @@
 import { useState, useRef } from "react"
+import { useNavigate } from "react-router-dom"
 import { NETFLIX_BG } from "../utils/constants"
 import Header from "./Header"
 import Validation from "../utils/validation"
@@ -8,6 +9,8 @@ import { auth } from "../utils/firebase";
 
 
 const Login=()=>{
+
+    const navigate=useNavigate()
 
     const [isSignIn,setIsSignIn]=useState(true)
     const [errorMessage,setErrorMessage]=useState(null)
@@ -32,6 +35,7 @@ const Login=()=>{
                 createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
                         .then((userCredential) => {
                         const user = userCredential.user;
+                        navigate("/browse")
                     })
                     .catch((error) => {
                         const errorCode = error.code;
@@ -45,6 +49,7 @@ const Login=()=>{
                 signInWithEmailAndPassword(auth, email.current.value, password.current.value)
                     .then((userCredential) => {
                         const user = userCredential.user;
+                        navigate("/browse")
                     })
                     .catch((error) => {
                         const errorCode = error.code;
@@ -68,7 +73,7 @@ const Login=()=>{
             <div className="absolute w-3/12 h-[500px] mx-auto p-12 my-52 right-0 left-0 bg-black bg-opacity-80 text-white">
                 <h1 className="mb-8 font-medium text-3xl">{isSignIn ? "Sign In" : "Sign Up"}</h1>
 
-                <form onClick={(e)=>e.preventDefault()}>
+                <form onSubmit={(e)=>e.preventDefault()}>
                     {!isSignIn && <input type="text" placeholder="Name" className="p-2 my-4 w-full text-black rounded-lg" required/>}
                     <input ref={email} type="text" placeholder="Email" className="p-2 my-4 w-full text-black rounded-lg" required/>
                     <input ref={password} type="password" placeholder="Password"  className="p-2 my-4 w-full text-black rounded-lg" required/> <br/>
