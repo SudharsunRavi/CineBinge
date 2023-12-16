@@ -4,17 +4,21 @@ import { NETFLIX_BG } from "../utils/constants"
 import Header from "./Header"
 import Validation from "../utils/validation"
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/redux/userSlice";
 
 
 const Login=()=>{
 
     const navigate=useNavigate()
+    const dispatch=useDispatch()
 
     const [isSignIn,setIsSignIn]=useState(true)
     const [errorMessage,setErrorMessage]=useState(null)
 
+    const name=useRef(null)
     const email=useRef(null)
     const password=useRef(null)
 
@@ -35,7 +39,17 @@ const Login=()=>{
                 createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
                         .then((userCredential) => {
                         const user = userCredential.user;
-                        navigate("/browse")
+                        updateProfile(user, {
+                        displayName: name.current.value , photoURL: "https://example.com/jane-q-user/profile.jpg"
+                        }).then(() => {
+                            const {uid, email, displayName, photoURL} = auth.currentUser;
+                            dispatch(addUser({uid:uid, email:email, displayName:displayName, photoURL:photoURL}))
+                            navigate("/browse")
+                        }).catch((error) => {
+                            const errorCode = error.code;
+                            const errorMessage = error.message;
+                            setErrorMessage(errorCode+errorMessage)
+                        });
                     })
                     .catch((error) => {
                         const errorCode = error.code;
@@ -74,7 +88,7 @@ const Login=()=>{
                 <h1 className="mb-8 font-medium text-3xl">{isSignIn ? "Sign In" : "Sign Up"}</h1>
 
                 <form onSubmit={(e)=>e.preventDefault()}>
-                    {!isSignIn && <input type="text" placeholder="Name" className="p-2 my-4 w-full text-black rounded-lg" required/>}
+                    {!isSignIn && <input ref={name} type="text" placeholder="Name" className="p-2 my-4 w-full text-black rounded-lg" required/>}
                     <input ref={email} type="text" placeholder="Email" className="p-2 my-4 w-full text-black rounded-lg" required/>
                     <input ref={password} type="password" placeholder="Password"  className="p-2 my-4 w-full text-black rounded-lg" required/> <br/>
                     <p className="text-red-600">{errorMessage}</p>
