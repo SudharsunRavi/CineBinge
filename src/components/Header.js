@@ -1,5 +1,4 @@
 import { NETFLIX_LOGO } from "../utils/constants"
-import { USER_AVATAR } from "../utils/constants"
 
 import {  onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
@@ -16,15 +15,15 @@ const Header=()=>{
     const user=useSelector((store)=>store.user)
 
     const handleSignOut=()=>{
-        signOut(auth).then(() => {
-        navigate("/")
-        }).catch((error) => {
-        navigate("/error")
+        signOut(auth)
+        .then(() => {})
+        .catch((error) => {
+            navigate("/error")
         });
     }
 
     useEffect(()=>{
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribe=onAuthStateChanged(auth, (user) => {
             if (user) {
               const {uid, email, displayName, photoURL} = user;
               dispatch(addUser({uid:uid, email:email, displayName:displayName, photoURL:photoURL}))
@@ -34,6 +33,8 @@ const Header=()=>{
               navigate("/")
             }
           });
+        
+        return()=>{unsubscribe()} //unsubsibe from the listener when the component unmounts
     },[])
 
     return(

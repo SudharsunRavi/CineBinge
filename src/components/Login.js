@@ -1,6 +1,6 @@
 import { useState, useRef } from "react"
 import { useNavigate } from "react-router-dom"
-import { NETFLIX_BG } from "../utils/constants"
+import { NETFLIX_BG, USER_AVATAR } from "../utils/constants"
 import Header from "./Header"
 import Validation from "../utils/validation"
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -40,11 +40,10 @@ const Login=()=>{
                         .then((userCredential) => {
                         const user = userCredential.user;
                         updateProfile(user, {
-                        displayName: name.current.value , photoURL: "https://example.com/jane-q-user/profile.jpg"
+                        displayName: name.current.value , photoURL:USER_AVATAR
                         }).then(() => {
                             const {uid, email, displayName, photoURL} = auth.currentUser;
                             dispatch(addUser({uid:uid, email:email, displayName:displayName, photoURL:photoURL}))
-                            navigate("/browse")
                         }).catch((error) => {
                             const errorCode = error.code;
                             const errorMessage = error.message;
@@ -63,7 +62,6 @@ const Login=()=>{
                 signInWithEmailAndPassword(auth, email.current.value, password.current.value)
                     .then((userCredential) => {
                         const user = userCredential.user;
-                        navigate("/browse")
                     })
                     .catch((error) => {
                         const errorCode = error.code;
