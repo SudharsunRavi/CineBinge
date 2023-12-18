@@ -5,8 +5,12 @@ import usePopular from "../utils/hooks/usePopular";
 import SecondaryContainer from "./BrowseContainer/SecondaryContainer";
 import useTrending from "../utils/hooks/useTrending";
 import useUpcoming from "../utils/hooks/useUpcoming";
+import GPTSearch from "./GPTContainer/GPTSearch";
+import { useSelector } from "react-redux";
 
 const Browse=()=>{
+    const gptSearch=useSelector((store)=>store.gpt.toogleGPTSearch)
+
     useNowPlaying();
     usePopular();
     useTrending();
@@ -15,8 +19,16 @@ const Browse=()=>{
     return(
         <div>
             <Header/>
-            <MainContainer/>
-            <SecondaryContainer/>
+            {gptSearch ? 
+                <GPTSearch/> 
+                : 
+                <>
+                    <MainContainer/>
+                    <SecondaryContainer/>
+                </> 
+            }
+            
+            
         </div>
         
     )
