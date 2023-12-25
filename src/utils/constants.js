@@ -13,3 +13,7 @@ export const TMDB_API = {
 };
 
 export const TMDB_MOVIE_IMG="https://image.tmdb.org/t/p/w500"
+
+export const LANGUAGES=[{identifier:"english", name:"English"},{identifier:"tamil", name:"Tamil"},{identifier:"hindi", name:"Hindi"}]
+
+export const OPENAI_KEY="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"
