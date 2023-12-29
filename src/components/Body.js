@@ -1,11 +1,10 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
-import { useDispatch } from "react-redux"
 
 import Login from "./Login"
 import Browse from "./Browse"
+import Watchpage from "./Watchpage";
 
 const Body=()=>{
-        const dispatch=useDispatch()
 
         const appRouter=createBrowserRouter([
             {
@@ -16,6 +15,10 @@ const Body=()=>{
                 path:"/browse",
                 element:<Browse/>
             },
+            {
+                path: '/browse/:movieID',
+                element : <Watchpage />,
+            }
         ]);
 
         return(
