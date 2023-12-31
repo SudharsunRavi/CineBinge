@@ -1,5 +1,4 @@
-import { LANGUAGES, NETFLIX_LOGO } from "../utils/constants"
-
+import { LANGUAGES, LOGO } from "../utils/constants"
 import {  onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
@@ -50,9 +49,9 @@ const Header=()=>{
     return(
         <div className="absolute px-8 py-2 bg-gradient-to-b from-black w-screen z-10">
             <div className="flex justify-between">
-                <img src={NETFLIX_LOGO} 
-                    alt="Netflix Logo" 
-                    className="w-[380px] h-[100px] object-contain" 
+                <img src={LOGO} 
+                    alt="Logo" 
+                    className="w-[300px] h-[100px] object-contain" 
                 />
 
                 {user && (

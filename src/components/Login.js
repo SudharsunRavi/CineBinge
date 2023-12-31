@@ -12,7 +12,6 @@ import { addUser } from "../utils/redux/userSlice";
 
 const Login=()=>{
 
-    const navigate=useNavigate()
     const dispatch=useDispatch()
 
     const [isSignIn,setIsSignIn]=useState(true)
@@ -93,7 +92,7 @@ const Login=()=>{
                     <button className="p-2 my-4 bg-red-600 w-full rounded-lg" onClick={handleValidation}>{isSignIn ? "Sign In" : "Sign Up"}</button>
                 </form>
 
-                <p className="py-3 cursor-pointer" onClick={handleSignIn}>{isSignIn ? "New to Netflix? Sign up" : "Already a user? Sign in"}</p>
+                <p className="py-3 cursor-pointer" onClick={handleSignIn}>{isSignIn ? "Sign up" : "Already a user? Sign in"}</p>
             </div>
 
         </div>

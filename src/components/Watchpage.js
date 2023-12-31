@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { TMDB_API } from "../utils/constants"
 import { useParams } from "react-router-dom";
-
 import VideoBackground from "./BrowseContainer/VideoBackground";
 import VideoTitle from "./BrowseContainer/VideoTitle";
 import SimilarMovies from "./SimilarMovies";
-import { NETFLIX_LOGO } from "../utils/constants"
+import {LOGO } from "../utils/constants"
 
 const Watchpage = () => {
     const {movieId}=useParams();
@@ -28,9 +27,9 @@ const Watchpage = () => {
     <>
       <div className="absolute px-8 py-2 bg-gradient-to-b from-black w-screen z-10">
             <div className="flex justify-between">
-                <img src={NETFLIX_LOGO} 
-                    alt="Netflix Logo" 
-                    className="w-[380px] h-[100px] object-contain" 
+                <img src={LOGO} 
+                    alt="Logo" 
+                    className="w-[300px] h-[100px] object-contain" 
                 />
                 </div>
       </div>

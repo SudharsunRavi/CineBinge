@@ -1,6 +1,6 @@
 import SearchBar from "./SearchBar"
 
-const GPTSearch=()=>{
+const Search=()=>{
     return(
         <div className="bg-black absolute w-full h-screen">
             <SearchBar/>
@@ -8,4 +8,4 @@ const GPTSearch=()=>{
     )
 }
 
-export default GPTSearch
+export default Search
