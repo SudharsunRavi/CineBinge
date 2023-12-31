@@ -14,8 +14,6 @@ const useSimilarMovies=()=>{
         //console.log(jsonData.results);
         if (jsonData.results && jsonData.results.length > 0) {
             dispatch(addSimilarMovies(jsonData.results));
-        } else {
-            console.log("No similar movies found.");
         }
     }
 

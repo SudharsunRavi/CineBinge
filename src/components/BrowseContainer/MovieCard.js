@@ -4,7 +4,7 @@ import { TMDB_MOVIE_IMG } from "../../utils/constants";
 
 const MovieCard = ({ movieId, posterPath }) => {
   return (
-    <div className="w-48 pr-5 cursor-pointer">
+    <div className="w-48 pr-5 cursor-pointer mb-5">
       <Link to={'/browse/'+movieId}>
         <img src={TMDB_MOVIE_IMG + posterPath} alt="movie poster" />
       </Link>

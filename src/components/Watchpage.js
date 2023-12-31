@@ -11,7 +11,6 @@ const Watchpage = () => {
     const {movieId}=useParams();
     const [jsonData, setJsonData] = useState(null)
 
-
     const movieDetails=async()=>{
         const data=await fetch('https://api.themoviedb.org/3/movie/'+movieId+'?language=en-US', TMDB_API)
         const jsonData=await data.json();
