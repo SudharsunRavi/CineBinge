@@ -16,7 +16,7 @@ const Body=()=>{
                 element:<Browse/>
             },
             {
-                path: '/browse/:movieID',
+                path: '/browse/:movieId',
                 element : <Watchpage />,
             }
         ]);

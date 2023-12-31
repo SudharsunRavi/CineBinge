@@ -9,16 +9,17 @@ const useTrailerVideo=(movieId)=>{
     const movieVideos=async()=>{
         const data=await fetch("https://api.themoviedb.org/3/movie/"+movieId+"/videos?language=en-US", TMDB_API)
         const jsonData=await data.json()
+        if (jsonData.results && Array.isArray(jsonData.results)) {
+            const filterTrailer=jsonData.results.filter((video)=>video.type==='Trailer')
+            const trailer=filterTrailer.length===0 ? jsonData.results[0] : filterTrailer[0]
 
-        const filterTrailer=jsonData.results.filter((video)=>video.type==='Trailer')
-        const trailer=filterTrailer.length===0 ? jsonData.results[0] : filterTrailer[0]
-
-        dispatch(addTrailerVideo(trailer))
+            dispatch(addTrailerVideo(trailer))
+        }
     }
 
     useEffect(()=>{
         movieVideos()
-    },[])
+    },[movieId, dispatch])
 }
 
 export default useTrailerVideo
